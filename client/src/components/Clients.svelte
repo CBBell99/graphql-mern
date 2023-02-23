@@ -24,10 +24,23 @@
   <p>Error: Something Went Wrong</p>
 {:else}
   {#each $clients.data.clients as client}
-  <div> {client.email}</div>  
-  <div>{client.id}</div>
-  <div>{client.email}</div>
-  <div>{client.phone}</div>
+  <table class="table table-hover mt-3">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>{client.name}</td>
+        <td>{client.email}</td>
+        <td>{client.phone}</td>
+      </tr>
+    </tbody>
+  </table>
   <br/>
   {/each}
 {/if}
