@@ -1,25 +1,34 @@
 <script>
-	import { ApolloClient, InMemoryCache, gql } from '@apollo/client/core';
-	import { setClient } from 'svelte-apollo';
-  import { query } from 'svelte-apollo';
-
-	setClient(new ApolloClient({
-		uri: 'http://localhost:5001/graphql',
-		cache: new InMemoryCache(),
-	}));
-  
+	import { gql } from '@apollo/client/core';
+	import { query } from 'svelte-apollo';
+	// import {client} from "../routes/+page.svelte"
 
 	const GET_CLIENTS = gql`
- query {
-    clients {
-      id
-      name
-      email
-      phone
-    }
-  }
-`;
+		query getClients {
+			clients {
+				id
+				name
+				email
+				phone
+			}
+		}
+	`;
+	const clients = query(GET_CLIENTS);
 </script>
 
 <div>Clients</div>
-<p></p>
+<div>
+{#if $clients.loading}
+  <p>Loading...</p>
+{:else if $clients.error}
+  <p>Error: Something Went Wrong</p>
+{:else}
+  {#each $clients.data.clients as client}
+  <div> {client.email}</div>  
+  <div>{client.id}</div>
+  <div>{client.email}</div>
+  <div>{client.phone}</div>
+  <br/>
+  {/each}
+{/if}
+</div>
