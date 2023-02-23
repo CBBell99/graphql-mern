@@ -1,6 +1,7 @@
 <script>
 	import { gql } from '@apollo/client/core';
 	import { query } from 'svelte-apollo';
+	import ClientRow from './ClientRow.svelte';
 	// import {client} from "../routes/+page.svelte"
 
 	const GET_CLIENTS = gql`
@@ -34,11 +35,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td>{client.name}</td>
-        <td>{client.email}</td>
-        <td>{client.phone}</td>
-      </tr>
+      <ClientRow client={client}/>
     </tbody>
   </table>
   <br/>
