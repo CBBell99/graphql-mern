@@ -1,2 +1,15 @@
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
+<script>
+	import { ApolloClient, InMemoryCache } from '@apollo/client/core';
+	import { setClient } from '$svelte-apollo/client';
+
+	const client = new ApolloClient({
+		uri: 'http://localhost:5001/graphql',
+		cache: new InMemoryCache(),
+	});
+
+	setClient(client);
+</script>
+
+<div class="container">
+	<h1>Hello World</h1>
+</div>
